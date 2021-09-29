@@ -1,47 +1,44 @@
-from gl import Raytracer, V3, _color
-from obj import Obj, Texture
+from gl import Raytracer, V3
+from obj import *
+from figures import *
 
-from figures import Sphere, Material
+# Dimensiones
+width = 512
+height = 512
 
-width = 960
-height = 960
+# Materiales
+wood = Material(diffuse = (0.6,0.2,0.2), spec = 64)
+stone = Material(diffuse = (0.4,0.4,0.4), spec = 64)
+
+gold = Material(diffuse = (1, 0.8, 0 ),spec = 32, matType = REFLECTIVE)
+mirror = Material(spec = 128, matType = REFLECTIVE)
+
+water = Material(spec = 64, ior = 1.33, matType = TRANSPARENT)
+glass = Material(spec = 64, ior = 1.5, matType = TRANSPARENT)
+diamond = Material(spec = 64, ior = 2.417, matType = TRANSPARENT)
 
 
-nieve = Material(diffuse = _color(1,1,1))
-boton = Material(diffuse = _color(0,0,0))
-nariz = Material(diffuse = _color(1, 165/255,0))
-
-
-
+# Inicializacion
 rtx = Raytracer(width,height)
+rtx.envmap = EnvMap('parque.bmp')
 
-#Bolas de Nieve
-rtx.scene.append( Sphere(V3(0,-2.5,-10), 2, nieve) )
-rtx.scene.append( Sphere(V3(0,0.5,-10), 1.5, nieve) )
-rtx.scene.append( Sphere(V3(0,3,-10), 1.2, nieve) )
+# Luces
+rtx.ambLight = AmbientLight(strength = 0.1)
+rtx.dirLight = DirectionalLight(direction = V3(1, -1, -2), intensity = 0.5)
+rtx.pointLights.append( PointLight(position = V3(0, 2, 0), intensity = 0.5))
 
-#Botones
-rtx.scene.append( Sphere(V3(0,-2.2,-8), 0.3, boton) )
-rtx.scene.append( Sphere(V3(0,-0.6,-8), 0.3, boton) )
-rtx.scene.append( Sphere(V3(0,1,-8), 0.3, boton) )
+# Objetos
+rtx.scene.append( Sphere(V3(-2,3,-8), 1, mirror) )
+rtx.scene.append( Sphere(V3(2,3,-8), 1, glass) )
 
-#Nariz
-rtx.scene.append( Sphere(V3(0,2.5,-8), 0.25, nariz) )
+rtx.scene.append( Sphere(V3(-2,0,-8), 1, mirror) )
+rtx.scene.append( Sphere(V3(2,0,-8), 1, glass) )
 
-#Ojos
-rtx.scene.append( Sphere(V3(-0.5,2.7,-8), 0.1, boton) )
-rtx.scene.append( Sphere(V3(0.5,2.7,-8), 0.1, boton) )
-
-
-#Boca
-rtx.scene.append( Sphere(V3(-0.4,2.2,-8), 0.1, boton) )
-rtx.scene.append( Sphere(V3(-0.18,2,-8), 0.1, boton) )
-rtx.scene.append( Sphere(V3(0.18,2,-8), 0.1, boton) )
-rtx.scene.append( Sphere(V3(0.4,2.2,-8), 0.1, boton) )
-#rtx.scene.append( Sphere(V3(0,-2.2,-8), 0.15, boton) )
+rtx.scene.append( Sphere(V3(-2,-3,-8), 1, mirror) )
+rtx.scene.append( Sphere(V3(2,-3,-8), 1, glass) )
 
 
 
+# Terminar
 rtx.glRender()
-
 rtx.glFinish('output.bmp')
