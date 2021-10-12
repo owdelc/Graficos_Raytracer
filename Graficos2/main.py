@@ -22,32 +22,6 @@ esmeralda = Material(diffuse = (0,0.61,0.44), spec = 64, ior = 1.33, matType = T
 rubi = Material(diffuse= (0.60, 0.06, 0.12), spec = 64, ior = 1.33, matType= TRANSPARENT)
 r_quartz = Material(diffuse=(0.97, 0.79, 0.84), spec= 64, ior = 1.33, matType= OPAQUE)
 
-'''
-# Inicializacion
-rtx = Raytracer(width,height)
-rtx.envmap = EnvMap('d3.bmp')
-
-# Luces
-rtx.ambLight = AmbientLight(strength = 0.1)
-rtx.dirLight = DirectionalLight(direction = V3(1, -1, -2), intensity = 0.5)
-rtx.pointLights.append( PointLight(position = V3(0, 2, 0), intensity = 0.5))
-
-# Objetos
-rtx.scene.append( Sphere(V3(-2,3,-8), 1, mirror) )
-rtx.scene.append( Sphere(V3(2,3,-8), 1, gold) )
-
-rtx.scene.append( Sphere(V3(-2,0,-8), 1, glass) )
-rtx.scene.append( Sphere(V3(2,0,-8), 1, diamond) )
-
-rtx.scene.append( Sphere(V3(-2,-3,-8), 1, zafiro) )
-rtx.scene.append( Sphere(V3(2,-3,-8), 1, esmeralda) )
-
-
-
-# Terminar
-rtx.glRender()
-rtx.glFinish('output.bmp')
-'''
 
 earth = Material(texture = Texture('earthDay.bmp'))
 box = Material(texture = Texture('box.bmp'))
@@ -60,7 +34,6 @@ rtx.envmap = EnvMap('d3.bmp')
 
 # Luces
 rtx.ambLight = AmbientLight(strength = 0.1)
-#rtx.dirLight = DirectionalLight(direction = V3(1, -1, -2), intensity = 0.5)
 rtx.dirLight = DirectionalLight(direction = V3(-2, 5, -2), intensity = 0.5)
 rtx.pointLights.append( PointLight(position = V3(-3, 0, 0), intensity = 0.5))
 
@@ -86,25 +59,6 @@ rtx.scene.append( Sphere(V3(1,-1,-4), 0.2, diamond) )
 rtx.scene.append( Sphere(V3(-0.5,0.5,-4), 0.2, diamond) )
 rtx.scene.append( Sphere(V3(0.5,0.5,-4), 0.2, diamond) )
 
-
-
-
-'''
-rtx.scene.append( AABB(V3(-3,-2,-8), V3(0.5,0.5,0.5), zafiro) )
-rtx.scene.append( AABB(V3(-2.5,-2,-8), V3(0.5,0.5,0.5), zafiro) )
-rtx.scene.append( AABB(V3(-2,-2,-8), V3(0.5,0.5,0.5), zafiro) )
-rtx.scene.append( AABB(V3(-1.5,-2,-8), V3(0.5,0.5,0.5), zafiro) )
-rtx.scene.append( AABB(V3(-1,-2,-8), V3(0.5,0.5,0.5), zafiro) )
-rtx.scene.append( AABB(V3(-0.5,-2,-8), V3(0.5,0.5,0.5), zafiro) )
-rtx.scene.append( AABB(V3(0,-2,-8), V3(0.5,0.5,0.5), zafiro) )
-rtx.scene.append( AABB(V3(0.5,-2,-8), V3(0.5,0.5,0.5), zafiro) )
-rtx.scene.append( AABB(V3(1,-2,-8), V3(0.5,0.5,0.5), zafiro) )
-rtx.scene.append( AABB(V3(1.5,-2,-8), V3(0.5,0.5,0.5), zafiro) )
-rtx.scene.append( AABB(V3(2,-2,-8), V3(0.5,0.5,0.5), zafiro) )
-rtx.scene.append( AABB(V3(2.5,-2,-8), V3(0.5,0.5,0.5), zafiro) )
-rtx.scene.append( AABB(V3(3,-2,-8), V3(0.5,0.5,0.5), zafiro) )
-rtx.scene.append( AABB(V3(3.5,-2,-8), V3(0.5,0.5,0.5), zafiro) )
-'''
 
 # Terminar
 rtx.glRender()
